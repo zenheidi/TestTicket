@@ -1,6 +1,284 @@
-*.class
+package hw1;
 
-# Package Files #
-*.jar
-*.war
-*.ear
+public class TestTicket {
+	public static void main(String[] args){
+		/*
+		 * TEST TicketUtil
+		 */
+		/*TicketUtil calculateRideCost one trip*/
+		System.out.println(725 == TicketUtil.calculateRideCost(5,2,false));
+		System.out.println(510 == TicketUtil.calculateRideCost(5,2,true));
+		System.out.println(725 == TicketUtil.calculateRideCost(2,5,false));
+		System.out.println(510 == TicketUtil.calculateRideCost(2,5,true));
+		System.out.println(375 == TicketUtil.calculateRideCost(1,2,false));
+		System.out.println(270 == TicketUtil.calculateRideCost(1,2,true));
+		
+		/*TicketUtil calculateRideCost multiple trips*/
+		// Send 1 trip
+		System.out.println(725 == TicketUtil.calculateRideCost(1,5,2,false));
+		System.out.println(510 == TicketUtil.calculateRideCost(1,5,2,true));
+		System.out.println(725 == TicketUtil.calculateRideCost(1,2,5,false));
+		System.out.println(510 == TicketUtil.calculateRideCost(1,2,5,true));
+		System.out.println(375 == TicketUtil.calculateRideCost(1,1,2,false));
+		System.out.println(270 == TicketUtil.calculateRideCost(1,1,2,true));
+		
+		// Send multiple trips
+		System.out.println(725*5 == TicketUtil.calculateRideCost(5,5,2,false));
+		System.out.println(510*5 == TicketUtil.calculateRideCost(5,5,2,true));
+		System.out.println(725*2 == TicketUtil.calculateRideCost(2,2,5,false));
+		System.out.println(510*2 == TicketUtil.calculateRideCost(2,2,5,true));
+		System.out.println(375*3 == TicketUtil.calculateRideCost(3,1,2,false));
+		System.out.println(270*3 == TicketUtil.calculateRideCost(3,1,2,true));
+		
+		/*TicketUtil getMinimumFare*/
+		System.out.println(200 == TicketUtil.getMinimumFare(false));
+		System.out.println(150 == TicketUtil.getMinimumFare(true));
+		
+		/*
+		 * TEST TicketMachine
+		 */
+		/*TicketMachin totalTickets & totalCost*/
+		TicketMachine tm1 = new TicketMachine();
+		Ticket ticket1 = tm1.purchaseTicket(5,2,false);
+		Ticket ticket2 = tm1.purchaseTicket(5,2,true);
+		Ticket ticket3 = tm1.purchaseTicket(5,5,2,false);
+		Ticket ticket4 = tm1.purchaseTicket(5,5,2,true);
+		Ticket ticket5 = tm1.purchaseTicket(1000,false);
+		Ticket ticket6 = tm1.purchaseTicket(1000,true);
+		System.out.println(6 == tm1.totalTickets());
+		System.out.println(9410 == tm1.totalCost());
+		
+		/*
+		 * TEST Ticket
+		 */
+		System.out.println(0 == ticket1.getStartZone());
+		System.out.println(0 == ticket2.getStartZone());
+		System.out.println(0 == ticket3.getStartZone());
+		System.out.println(0 == ticket4.getStartZone());
+		System.out.println(0 == ticket5.getStartZone());
+		System.out.println(0 == ticket6.getStartZone());
+		
+		System.out.println(!ticket1.isInTransit());
+		System.out.println(!ticket2.isInTransit());
+		System.out.println(!ticket3.isInTransit());
+		System.out.println(!ticket4.isInTransit());
+		System.out.println(!ticket5.isInTransit());
+		System.out.println(!ticket6.isInTransit());
+		
+		System.out.println(725 == ticket1.getBalance());
+		System.out.println(510 == ticket2.getBalance());
+		System.out.println(3625 == ticket3.getBalance());
+		System.out.println(2550 == ticket4.getBalance());
+		System.out.println(1000 == ticket5.getBalance());
+		System.out.println(1000 == ticket6.getBalance());
+		
+		System.out.println(!ticket1.isDiscounted());
+		System.out.println(ticket2.isDiscounted());
+		System.out.println(!ticket3.isDiscounted());
+		System.out.println(ticket4.isDiscounted());
+		System.out.println(!ticket5.isDiscounted());
+		System.out.println(ticket6.isDiscounted());
+		
+		/* 
+		Used to test Ticket.java before Turnstile was created.
+		
+		ticket1.beginTrip(1);
+		ticket2.beginTrip(1);
+		ticket3.beginTrip(6);
+		ticket4.beginTrip(6);
+		ticket5.beginTrip(3);
+		ticket6.beginTrip(3);
+		
+		System.out.println(1 == ticket1.getStartZone());
+		System.out.println(1 == ticket2.getStartZone());
+		System.out.println(6 == ticket3.getStartZone());
+		System.out.println(6 == ticket4.getStartZone());
+		System.out.println(3 == ticket5.getStartZone());
+		System.out.println(3 == ticket6.getStartZone());
+		
+		System.out.println(ticket1.isInTransit());
+		System.out.println(ticket2.isInTransit());
+		System.out.println(ticket3.isInTransit());
+		System.out.println(ticket4.isInTransit());
+		System.out.println(ticket5.isInTransit());
+		System.out.println(ticket6.isInTransit());
+		
+		System.out.println(ticket1.charge(125));
+		System.out.println(!ticket2.charge(700));
+		System.out.println(ticket3.charge(2500));
+		System.out.println(!ticket4.charge(500000));
+		System.out.println(ticket5.charge(800));
+		System.out.println(ticket6.charge(77));
+		
+		System.out.println(600 == ticket1.getBalance());
+		System.out.println(510 == ticket2.getBalance());
+		System.out.println(1125 == ticket3.getBalance());
+		System.out.println(510*5 == ticket4.getBalance());
+		System.out.println(200 == ticket5.getBalance());
+		System.out.println(923 == ticket6.getBalance());
+		*/
+		
+		/*
+		 * TEST Turnstile
+		 */
+		Turnstile station1 = new Turnstile(1);
+		Turnstile station4 = new Turnstile(4);
+		System.out.println(0 == station1.getEntranceCount());
+		System.out.println(0 == station1.getExitCount());
+		System.out.println(0 == station4.getEntranceCount());
+		System.out.println(0 == station4.getExitCount());
+		
+		System.out.println(station1.swipeIn(ticket1));
+		System.out.println(station1.swipeIn(ticket2));
+		System.out.println(station1.swipeIn(ticket3));
+		System.out.println(station1.swipeIn(ticket4));
+		System.out.println(station1.swipeIn(ticket5));
+		System.out.println(station1.swipeIn(ticket6));
+		
+		System.out.println(1 == ticket1.getStartZone());
+		System.out.println(1 == ticket2.getStartZone());
+		System.out.println(1 == ticket3.getStartZone());
+		System.out.println(1 == ticket4.getStartZone());
+		System.out.println(1 == ticket5.getStartZone());
+		System.out.println(1 == ticket6.getStartZone());
+		
+		System.out.println(ticket1.isInTransit());
+		System.out.println(ticket2.isInTransit());
+		System.out.println(ticket3.isInTransit());
+		System.out.println(ticket4.isInTransit());
+		System.out.println(ticket5.isInTransit());
+		System.out.println(ticket6.isInTransit());
+		
+		System.out.println(725 == ticket1.getBalance());
+		System.out.println(510 == ticket2.getBalance());
+		System.out.println(3625 == ticket3.getBalance());
+		System.out.println(2550 == ticket4.getBalance());
+		System.out.println(1000 == ticket5.getBalance());
+		System.out.println(1000 == ticket6.getBalance());
+		
+		System.out.println(!ticket1.isDiscounted());
+		System.out.println(ticket2.isDiscounted());
+		System.out.println(!ticket3.isDiscounted());
+		System.out.println(ticket4.isDiscounted());
+		System.out.println(!ticket5.isDiscounted());
+		System.out.println(ticket6.isDiscounted());
+		
+		System.out.println(6 == station1.getEntranceCount());
+		System.out.println(0 == station1.getExitCount());
+		
+		System.out.println(station4.swipeOut(ticket1));
+		System.out.println(station4.swipeOut(ticket2));
+		System.out.println(station4.swipeOut(ticket3));
+		System.out.println(station4.swipeOut(ticket4));
+		System.out.println(station4.swipeOut(ticket5));
+		System.out.println(station4.swipeOut(ticket6));
+		
+		System.out.println(0 == station4.getEntranceCount());
+		System.out.println(6 == station4.getExitCount());
+		
+		System.out.println(0 == ticket1.getBalance());
+		System.out.println(0 == ticket2.getBalance());
+		System.out.println(2900 == ticket3.getBalance());
+		System.out.println(2040 == ticket4.getBalance());
+		System.out.println(275 == ticket5.getBalance());
+		System.out.println(490 == ticket6.getBalance());
+		
+		System.out.println("is NOT InTransit: " + !ticket1.isInTransit());
+		System.out.println(!ticket2.isInTransit());
+		System.out.println(!ticket3.isInTransit());
+		System.out.println(!ticket4.isInTransit());
+		System.out.println(!ticket5.isInTransit());
+		System.out.println(!ticket6.isInTransit());
+		
+		System.out.println("UNsuccessful swipeOut: " + !station4.swipeOut(ticket1));
+		System.out.println(!station4.swipeOut(ticket2));
+		System.out.println(!station4.swipeOut(ticket3));
+		System.out.println(!station4.swipeOut(ticket4));
+		System.out.println(!station4.swipeOut(ticket5));
+		System.out.println(!station4.swipeOut(ticket6));
+		
+		System.out.println(0 == station4.getEntranceCount());
+		System.out.println(6 == station4.getExitCount());
+		
+		System.out.println(0 == ticket1.getBalance());
+		System.out.println(0 == ticket2.getBalance());
+		System.out.println(2900 == ticket3.getBalance());
+		System.out.println(2040 == ticket4.getBalance());
+		System.out.println(275 == ticket5.getBalance());
+		System.out.println(490 == ticket6.getBalance());
+		
+		System.out.println(!station1.swipeIn(ticket1));
+		System.out.println(!station1.swipeIn(ticket2));
+		System.out.println(station1.swipeIn(ticket3));
+		System.out.println(station1.swipeIn(ticket4));
+		System.out.println(station1.swipeIn(ticket5));
+		System.out.println(station1.swipeIn(ticket6));
+		
+		System.out.println(10 == station1.getEntranceCount());
+		System.out.println(0 == station1.getExitCount());
+		
+		System.out.println(0 == ticket1.getBalance());
+		System.out.println(0 == ticket2.getBalance());
+		System.out.println(2900 == ticket3.getBalance());
+		System.out.println(2040 == ticket4.getBalance());
+		System.out.println(275 == ticket5.getBalance());
+		System.out.println(490 == ticket6.getBalance());
+		
+		System.out.println(!station1.swipeIn(ticket1));
+		System.out.println(!station1.swipeIn(ticket2));
+		System.out.println(station1.swipeIn(ticket3));
+		System.out.println(station1.swipeIn(ticket4));
+		System.out.println(!station1.swipeIn(ticket5));
+		System.out.println(station1.swipeIn(ticket6));
+		
+		System.out.println(0 == ticket1.getBalance());
+		System.out.println(0 == ticket2.getBalance());
+		System.out.println(2700 == ticket3.getBalance());
+		System.out.println(1890 == ticket4.getBalance());
+		System.out.println(75 == ticket5.getBalance());
+		System.out.println(340 == ticket6.getBalance());
+		
+		System.out.println(13 == station1.getEntranceCount());
+		System.out.println(4 == station1.getExitCount());
+		
+		/*
+		 * Global Tests
+		 */
+		/*Tests for negative parameters*/
+		TicketMachine tm = new TicketMachine();
+		Ticket ticket0 = tm.purchaseTicket(1000,false);
+		  
+		Turnstile ts = new Turnstile(-1);
+		ts.swipeIn(ticket0);
+		System.out.println("Should be 0: " + ts.getEntranceCount()); 
+		System.out.println("StartZone should be 0: " + ticket0.getStartZone());
+		System.out.println("In Transit should be false: " + ticket0.isInTransit());
+		System.out.println("Balance should be 1000: " + ticket0.getBalance());
+
+
+		TicketMachine tm10 = new TicketMachine();
+		Ticket ticket10 = tm10.purchaseTicket(5,10,-65,false);
+
+		System.out.println("StartZone should be 0: " + ticket10.getStartZone());
+		System.out.println("In Transit should be false: " + ticket10.isInTransit());
+		System.out.println("Balance should be 0: " + ticket10.getBalance());
+		System.out.println("discounted should be false: " + ticket10.isDiscounted());
+		
+		/*Misc*/
+		TicketMachine tm11 = new TicketMachine();
+		Ticket ticket11 = tm11.purchaseTicket(1000,false);
+		
+		System.out.println("StartZone should be 0: " + ticket11.getStartZone());
+		System.out.println("In Transit should be false: " + ticket11.isInTransit());
+		System.out.println("Balance should be 1000: " + ticket11.getBalance());
+		System.out.println("discounted should be false: " + ticket11.isDiscounted());
+		
+		Turnstile ts11 = new Turnstile(11);
+		ts11.swipeIn(ticket11);
+		System.out.println("StartZone should be 11: " + ticket11.getStartZone());
+		System.out.println("In Transit should be true: " + ticket11.isInTransit());
+		System.out.println("Balance should be 1000: " + ticket11.getBalance());
+		System.out.println("discounted should be false: " + ticket11.isDiscounted());
+		
+	}
+}
